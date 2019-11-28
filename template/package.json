@@ -1,0 +1,63 @@
+{
+  "name": "{{ name }}",
+  "version": "1.0.0",
+  "description": "{{ description }}",
+  "author": "{{ author }}",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt-ts",
+    "build": "nuxt-ts build",
+    "start": "npm run build && nuxt-ts start",
+    "generate": "nuxt-ts generate",
+    "lint": "eslint --ext .ts,.js,.vue --ignore-path .gitignore .",
+    "lintfix": "eslint --fix --ext .ts,.js,.vue --ignore-path .gitignore .",
+    "mock": "cross-env NUXT_ENV=mock npm run dev",
+    "develop": "cross-env NUXT_ENV=dev npm run dev",
+    "local": "cross-env NUXT_ENV=local npm run dev",
+    "stage": "cross-env NUXT_ENV=stage npm run dev",
+    "build:MOCK": "npm run delete; pm2 start npm ecosystem.config.js --env mock --name {{ name }} -- start",
+    "build:DEVELOP": "npm run delete; pm2 start npm ecosystem.config.js --env dev --name {{ name }} -- start",
+    "build:TEST": "npm run delete; pm2 start npm ecosystem.config.js --env stage --name {{ name }} -- start",
+    "build:UAT": "npm run delete; pm2 start npm ecosystem.config.js --env uat --name {{ name }} -- start",
+    "build:PRODUCT-HZ": "npm run delete; pm2 start npm ecosystem.config.js --env productionHZ --name {{ name }} -- start",
+    "build:PRODUCT-SZ": "npm run delete; pm2 start npm ecosystem.config.js --env productionSZ --name {{ name }} -- start",
+    "delete": "pm2 delete {{ name }}",
+    "test": "jest"
+  },
+  "lint-staged": {
+    "*.{ts,js,vue}": "eslint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "dependencies": {
+    "@nuxt/typescript-runtime": "^0.2.4",
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/dotenv": "^1.4.0",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "cross-env": "^6.0.3",
+    "nuxt": "^2.0.0",
+    "nuxt-property-decorator": "^2.5.0",
+    "vuex-module-decorators": "^0.11.0"
+  },
+  "devDependencies": {
+    "@nuxt/typescript-build": "^0.3.4",
+    "@nuxtjs/eslint-config-typescript": "^1.0.0",
+    "@nuxtjs/eslint-module": "^1.0.0",
+    "@nuxtjs/stylelint-module": "^3.1.0",
+    "@vue/test-utils": "^1.0.0-beta.27",
+    "babel-jest": "^24.1.0",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-nuxt": ">=0.4.2",
+    "eslint-plugin-prettier": "^3.0.1",
+    "husky": "^2.6.0",
+    "jest": "^24.1.0",
+    "lint-staged": "^8.2.1",
+    "prettier": "^1.16.4",
+    "stylelint": "^10.1.0",
+    "vue-jest": "^4.0.0-0"
+  }
+}

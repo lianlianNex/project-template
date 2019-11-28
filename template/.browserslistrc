@@ -1,0 +1,7 @@
+[production]
+> 0.1%
+IE > 8
+
+[development]
+last 1 chrome version
+last 1 firefox version
